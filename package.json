@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "dev": "node esbuild.mjs --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "blockbench-types": "^5.0.6",
+    "esbuild": "^0.27.2",
+    "typescript": "^5.9.3"
+  }
+}
