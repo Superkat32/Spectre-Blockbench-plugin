@@ -50,13 +50,14 @@ BBPlugin.register(
     title: 'Export to Spectre',
     author: 'Kilip1000 & CallMeEcho',
     description: 'Export your project as a Spectre json.',
+    // NOTE: This back up directory needs to be removed when the built js file isn't inside the `dist` folder
     icon: '../icon.png',
     creation_date: '2025-02-01',
     version: '2.0.0',
     variant: 'desktop',
     min_version: '4.12.4',
     has_changelog: false,
-    tags: ['Exporter'],
+    tags: ['Minecraft: Java Edition', 'Exporter'],
     repository: '',
     onload: load,
     onunload: unload

@@ -3,10 +3,10 @@ import esbuild from "esbuild"
 const watch = process.argv.includes("--watch");
 
 const settings = {
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["ts/index.ts"],
     bundle: true,
     format: "esm",
-    outfile: "./dist/export_to_spectre.js"
+    outfile: ".././dist/export_to_spectre.js"
 };
 
 if (watch) {
