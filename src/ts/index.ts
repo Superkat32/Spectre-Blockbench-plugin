@@ -1,5 +1,6 @@
 import {addRenderLayerDialog, loadRenderLayerPanel, unloadRenderLayerPanel} from "./renderlayer";
 import {loadSpectreProperties, unloadSpectreProperties} from "./properties";
+import {SPECTRE_CODEC, unloadSpectreFormat} from "./format";
 
 let menuItems: { action: Action, menuCategory: string }[];
 
@@ -11,29 +12,9 @@ function load() {
         {
             action: new Action("export-to-spectre-button", {
                 click() {
-                    // this returns quite a lot of metadata about all textures
-                    let textures = Project?.textures ?? [];
-                    // loop over them and extract the "width" and "height", and "img":"tex":"name" properties
-                    let properties = [];
-                    for (const texture of textures) {
-                        properties.push({
-                            texture: texture.img.tex.name, // same format as block textures
-                            texture_size: [ // technically more like a ratio than a size but making it the actual ratio (eg, 1:1 for square) would lead to floating point precision issues
-                                texture.width,
-                                texture.height
-                            ]
-                        });
-                    }
-                    const json = JSON.stringify({ properties }, null, 2);
-                    Blockbench.export({
-                        type: 'Spectre Model',
-                        extensions: ['json'],
-                        name: `${Project?.name ?? "unnamed"}.json`,
-                        content: json
-                    });
+                    SPECTRE_CODEC.export();
                 },
-
-                icon: "grain",
+                icon: "resize",
                 name: "Export Spectre Model"
             }),
             menuCategory: "file.export"
@@ -56,8 +37,9 @@ function load() {
 }
 
 function unload() {
-    unloadSpectreProperties();
     unloadRenderLayerPanel();
+    unloadSpectreProperties();
+    unloadSpectreFormat();
 
     for (const menuItem of menuItems) {
         menuItem.action.delete()
